@@ -1,0 +1,422 @@
+/* General */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: 640;
+}
+
+:root {
+    --primario: #f7aaaa;
+}
+
+.navbar-nav .btn-link {
+  text-align: right;
+  display: block;
+  width: 100%;
+}
+
+
+.logo {
+    max-width: 50px;
+}
+
+.globoTittle {
+    height: auto;
+    width: 250px;
+    max-width: 100%;
+    vertical-align: middle;
+    /* Alineación si está al lado del otro logo */
+}
+
+.contenedorUno {
+    display: flex;
+    justify-content: space-evenly;
+    height: 100%;
+    background-image: url(../src/assets/img/fondoUno.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    padding: 5rem 10rem;
+}
+
+
+
+.imglogo {
+    margin: auto;
+    width: 45%;
+    height: 60%;
+}
+
+.parrafoPrimero {
+    backdrop-filter: blur(4px);
+    background-color: #eeeeee4d;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 6rem 3rem;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0px 20px 10px rgba(0, 0, 0, 0.405);
+    transition: all 0.5s ease;
+    overflow: hidden;
+    transition: transform 0.4s ease, transform 0.4s ease-in-out;
+}
+
+.parrafoPrimero:hover {
+    box-shadow: 0px 20px 10px rgba(0, 0, 0, 0.1);
+    transition: all 1s ease;
+    transform: scale(1.1);
+}
+
+.galeria {
+    padding-bottom: 20px;
+    padding-top: 20px;
+    background-image: url(..//src/assets/img/Auno.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.tittleIndex {
+  text-align: center;
+  width: 100%;
+}
+
+.tituloImagen {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 60%; /* Para que sea responsive */
+}
+
+/* Asegura que las imágenes del carrusel se adapten */
+.carousel-item img {
+    width: 40%;
+    height: 100%;
+    /* Ajusta la altura al 100% del contenedor */
+    object-fit: contain;
+    /* Hace que la imagen no se recorte */
+    margin: auto;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.6);
+    /* fondo negro translúcido */
+    border-radius: 50%;
+    /* hace que se vea circular */
+    background-size: 50% 50%;
+    padding: 25px;
+}
+
+.carousel-item {
+    position: relative;
+    text-align: center;
+}
+
+.divCuadro {
+    display: flex;
+    justify-content: center;
+}
+
+.cuadroGallery {
+    background-color: rgba(255, 255, 255, 0.911);
+    padding: 1rem 2rem;
+    border: 3px solid black;
+    margin-bottom: 2rem;
+    margin-top: 20px;
+    transition: all 0.5s ease;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.divCuadro a {
+    text-align: center;
+    display: block;
+    padding: 10px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 18px;
+    margin-top: 7vh;
+    border-radius: 5px;
+}
+
+.divCuadro a:hover {
+    background-color: var(--primario);
+}
+
+.contenedorServicios{
+    display: flex;
+    justify-content: space-evenly;
+    height: 100%;
+    background-image: url(../src/assets/img/fondoUno.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    padding: 2rem 7rem;
+}
+
+.services {
+    padding: 2rem;
+}
+
+.servicesWrapper {
+    width: 80%;
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: auto;
+}
+
+.service {
+    backdrop-filter: blur(4px);
+    flex: 1 1 25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
+    box-shadow: 0px 20px 10px rgba(0, 0, 0, 0.405);
+    transition: all 0.5s ease;
+    padding: .5rem;
+    overflow: hidden;
+    transition: transform 0.4s ease, transform 0.4s ease-in-out;
+}
+
+.service:hover {
+    box-shadow: 0px 20px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    transform: scale(1.1);
+}
+
+.service img {
+    margin-top: 5vh;
+    width: 70%;
+    object-fit: cover;
+}
+
+.service h4 {
+    font-size: 1.5rem;
+}
+
+.service p {
+    text-align: center;
+    margin: 0 4vh 10vh;
+}
+
+.section2 {
+    background-image: url(../src/assets/img/atres.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 8rem 20rem;
+}
+
+
+/************************************ GALLERY ****************************************/
+
+.contenedorDos{
+    background-image: url(../src/assets/img/fondoUno.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.sectionGallery {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    margin: auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 30px;
+    padding: 6rem;
+}
+
+img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.navCategory {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 4vh;
+}
+
+.btn-light{
+    border: 3px solid black;
+
+}
+.btn-light:hover{
+    background-color: var(--primario);
+    border-color: #000000;
+}
+
+.producto {
+    background-color: #eeeeee4d;
+    padding: .5rem;
+    transition: transform 0.4s ease, transform 0.4s ease-in-out;
+}
+
+.producto:hover{
+    transform: scale(1.1);
+}
+
+.productoNombre,
+.productoPrecio {
+    font-size: 1rem;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.producto img {
+    padding: 1vh;
+}
+
+/************************************** Footer *********************************/
+.footer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #ddd;
+}
+
+.contacto{
+    margin-top: 30px;
+    margin-left: 5%;
+}
+
+.footerUno{
+    margin-left: 5%;
+}
+
+.footerDos {
+    display: flex;
+    justify-content: flex-start;
+    gap: 30vh;
+    margin-top: 20px;
+    margin-left: 10vh;
+}
+
+.dateFooter {
+    font-size: .8rem;
+    margin-left: 40px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.imgContact {
+    height: 8vh;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: transform 0.4s ease, transform 0.4s ease-in-out;
+}
+
+.imgContact:hover{
+    transform: scale(1.3);
+}
+
+/* Boton Scroll */
+
+/* Botón Subir */
+.botonSubir {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: transparent; /* ← Cambiar a transparente */
+  border: none;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0; /* ← Agregar padding 0 */
+}
+
+.botonSubir:hover {
+  background-color: transparent; /* ← Mantener transparente en hover */
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.flechaA {
+  width: 100%; /* ← Que ocupe todo el botón */
+  height: 100%;
+  border-radius: 50%; /* ← Redondear la imagen */
+  /* filter: brightness(0) invert(1); ← QUITAR esta línea */
+  object-fit: cover; /* ← Para que la imagen se ajuste */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .botonSubir {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* En App.css */
+@media (max-width: 992px) {
+    .navbar-nav {
+        text-align: right!important;
+    }
+
+    #navbarNav .navbar-nav {
+        margin-left: auto;
+    }
+
+        #navbarNav .navbar-nav .nav-item {
+        display: block;
+        text-align: right;
+    }
+
+    /* Específicamente para los botones Login/Register */
+    .navLogin {
+        text-align: right !important;
+        display: block !important;
+        width: 100% !important;
+    }
+
+}
+
+@media (max-width: 800px) {
+    .contenedorUno {
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .imglogo {
+        width: 100%;
+            }
+
+    .carousel-item img {
+    width: 60%;
+}
+}
