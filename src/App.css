@@ -570,6 +570,7 @@ img {
     
     .parrafoPrimero {
         margin: 2rem 1rem; /* Reducido para móvil */
+        max-width: 85%;
     }
     
     .contenedorServicios {
