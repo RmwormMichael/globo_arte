@@ -541,7 +541,7 @@ img {
     }
     
     .footerDos {
-        gap: 15vh;
+        gap: 6vh;
         margin-left: 5vh;
     }
 }
@@ -597,12 +597,7 @@ img {
         gap: 2vh;
     }
     
-    .footerDos {
-        flex-direction: column;
-        gap: 5vh;
-        margin-left: 0;
-        align-items: center;
-    }
+
     
     .contacto,
     .footerUno {
