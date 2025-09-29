@@ -156,6 +156,7 @@ body {
 .contenedorUno {
     display: flex;
     justify-content: space-evenly;
+    align-items: center; /* Añadido para centrar verticalmente */
     height: 100%;
     background-image: url(../src/assets/img/fondoUno.jpg);
     background-repeat: no-repeat;
@@ -163,13 +164,24 @@ body {
     background-attachment: fixed;
     background-size: cover;
     padding: 5rem 10rem;
-    width: 100%; /* Añadido */
+    width: 100%;
+    max-width: 100%; /* Asegurar que no se desborde */
+    overflow: hidden; /* Prevenir desbordamiento */
+}
+.contenedorUno .contenido-interno {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Mismo ancho máximo que otras secciones */
+    margin: 0 auto; /* Centrar horizontalmente */
 }
 
 .imglogo {
     margin: auto;
     width: 45%;
     height: 60%;
+    max-width: 400px; /* Limitar ancho máximo */
 }
 
 .parrafoPrimero {
@@ -178,14 +190,15 @@ body {
     text-align: center;
     font-size: 1rem;
     line-height: 1.5;
-    margin: 6rem 3rem;
+    margin: 0 3rem; /* Quitamos el margen vertical excesivo */
     border-radius: 5px;
     padding: 20px;
     box-shadow: 0px 20px 10px rgba(0, 0, 0, 0.405);
     transition: all 0.5s ease;
     overflow: hidden;
     transition: transform 0.4s ease, transform 0.4s ease-in-out;
-    width: 100%; /* Añadido */
+    width: 50%; /* Limitar ancho del párrafo */
+    max-width: 500px; /* Ancho máximo */
 }
 
 .parrafoPrimero:hover {
@@ -549,7 +562,12 @@ img {
 @media (max-width: 800px) {
     .contenedorUno {
         flex-direction: column;
-        padding: 1rem 2rem; /* Reducido para móvil */
+        padding: 1rem 2rem;
+    }
+
+        .contenedorUno .contenido-interno {
+        flex-direction: column;
+        gap: 2rem;
     }
 
     .globoTittle{
@@ -558,6 +576,7 @@ img {
 
     .imglogo {
         width: 80%;
+        max-width: 300px;
     }
 
     .logo{
@@ -569,8 +588,9 @@ img {
     }
     
     .parrafoPrimero {
-        margin: 2rem 1rem; /* Reducido para móvil */
-        max-width: 85%;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
     }
     
     .contenedorServicios {
@@ -619,6 +639,20 @@ img {
     .contenedorUno,
     .contenedorServicios {
         padding: 1rem; /* Mínimo padding */
+    }
+
+        .contenedorUno .contenido-interno {
+        gap: 1rem;
+    }
+
+    .imglogo {
+        width: 70%;
+        max-width: 250px;
+    }
+    
+    .parrafoPrimero {
+        padding: 15px;
+        font-size: 0.9rem;
     }
     
     .section2 {
