@@ -575,6 +575,14 @@ img {
     .contenedorServicios {
         padding: 1rem 2rem; /* Reducido para móvil */
     }
+
+    .tituloImagen{
+        max-width: 100%;
+    }
+
+    .divCuadro a{
+        max-width: 100%;
+    }
     
     .section2 {
         padding: 2rem 3rem; /* Reducido para móvil */
