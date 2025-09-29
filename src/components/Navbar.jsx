@@ -6,7 +6,7 @@ export default function Navbar({ onOpenLogin, onOpenRegister, user, onLogout }) 
   // Función para cerrar el navbar
   const closeNavbar = () => {
     const navbarCollapse = document.getElementById('navbarNav');
-    if (navbarCollapse.classList.contains('show')) {
+    if (navbarCollapse && navbarCollapse.classList.contains('show')) {
       const bsCollapse = new window.bootstrap.Collapse(navbarCollapse);
       bsCollapse.hide();
     }
@@ -14,13 +14,12 @@ export default function Navbar({ onOpenLogin, onOpenRegister, user, onLogout }) 
 
   // Función para cerrar el navbar y hacer scroll
   const handleNavClick = (sectionId) => {
-    closeNavbar(); // Cerrar navbar primero
+    closeNavbar();
     
-    // Scroll manual a la sección
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
-        const yOffset = -80; // Ajuste para el navbar
+        const yOffset = -80;
         const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
         
         window.scrollTo({
@@ -34,23 +33,28 @@ export default function Navbar({ onOpenLogin, onOpenRegister, user, onLogout }) 
   // Función para manejar Login
   const handleLogin = (e) => {
     e.preventDefault();
-    closeNavbar(); // Cerrar navbar
-    onOpenLogin(); // Abrir modal
+    closeNavbar();
+    onOpenLogin();
   };
 
   // Función para manejar Register
   const handleRegister = (e) => {
     e.preventDefault();
-    closeNavbar(); // Cerrar navbar
-    onOpenRegister(); // Abrir modal
+    closeNavbar();
+    onOpenRegister();
   };
 
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <img src={logo} className="logo" alt="Logo" />
-          <img src={logoTittle} className="globoTittle" alt="Globo Arte" />
+          {/* Contenedor para logo y título */}
+          <div className="d-flex align-items-center">
+            <img src={logo} className="logo" alt="Logo" />
+            <img src={logoTittle} className="globoTittle" alt="Globo Arte" />
+          </div>
+          
+          {/* Botón toggler */}
           <button
             className="navbar-toggler"
             type="button"
@@ -62,16 +66,14 @@ export default function Navbar({ onOpenLogin, onOpenRegister, user, onLogout }) 
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div
-            className="collapse navbar-collapse justify-content-end"
-            id="navbarNav"
-          >
-            <ul className="navbar-nav ms-auto">
+          
+          {/* Menú colapsable */}
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav">
               <li className="nav-item">
                 <button
                   className="nav-link btn btn-link"
                   onClick={() => handleNavClick('gallery')}
-                  style={{ border: "none", background: "transparent" }}
                 >
                   Gallery
                 </button>
@@ -80,7 +82,6 @@ export default function Navbar({ onOpenLogin, onOpenRegister, user, onLogout }) 
                 <button
                   className="nav-link btn btn-link"
                   onClick={() => handleNavClick('about')}
-                  style={{ border: "none", background: "transparent" }}
                 >
                   About
                 </button>
@@ -89,7 +90,6 @@ export default function Navbar({ onOpenLogin, onOpenRegister, user, onLogout }) 
                 <button
                   className="nav-link btn btn-link"
                   onClick={() => handleNavClick('services')}
-                  style={{ border: "none", background: "transparent" }}
                 >
                   Services
                 </button>
@@ -105,9 +105,8 @@ export default function Navbar({ onOpenLogin, onOpenRegister, user, onLogout }) 
                   </li>
                   <li className="nav-item">
                     <button
-                      className="nav-link btn btn-link navLogin"
+                      className="nav-link btn btn-link"
                       onClick={onLogout}
-                      style={{ border: "none", background: "transparent" }}
                     >
                       Cerrar Sesión
                     </button>
@@ -117,18 +116,16 @@ export default function Navbar({ onOpenLogin, onOpenRegister, user, onLogout }) 
                 <>
                   <li className="nav-item">
                     <button
-                      className="nav-link btn btn-link navLogin"
+                      className="nav-link btn btn-link"
                       onClick={handleLogin}
-                      style={{ border: "none", background: "transparent" }}
                     >
                       Login
                     </button>
                   </li>
                   <li className="nav-item">
                     <button
-                      className="nav-link btn btn-link navLogin"
+                      className="nav-link btn btn-link"
                       onClick={handleRegister}
-                      style={{ border: "none", background: "transparent" }}
                     >
                       Register
                     </button>
