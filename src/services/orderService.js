@@ -78,6 +78,18 @@ export const orderService = {
   },
 };
 
+// Función para obtener las órdenes del cliente actual
+export const getOrdersByClient = async (token) => {
+  const response = await fetch(`${API_URL}/orders/orders/my-orders`, {
+    headers: { 
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+  });
+  if (!response.ok) throw new Error('Error al obtener las órdenes.');
+  return await response.json();
+};
+
 // Exportaciones individuales para uso más conveniente
 export const createOrder = orderService.createOrder;
 export const getOrders = orderService.getOrders;

@@ -22,6 +22,9 @@ import { UserProvider } from "./context/UserProvider";
 import { useUser } from "./hooks/useUser";
 import NewOrderForm from "./components/NewOrderForm";
 import OrdersList from "./components/OrdersList";
+import ClientOrders from "./components/ClientOrders";
+import NewOrderFormClient from "./components/NewOrderFormClient";
+import ClientProfile from "./components/ClientProfile";
 
 function AppContent() {
   const { user, setUser } = useUser();
@@ -89,6 +92,32 @@ function AppContent() {
               <About />
               <TemplatesGallery />
             </div>
+          }
+        />
+
+        {/* Rutas de Cliente */}
+        <Route
+          path="/cliente/my-orders"
+          element={
+            <ProtectedRoute>
+              <ClientOrders />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/cliente/new-order"
+          element={
+            <ProtectedRoute>
+              <NewOrderFormClient />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/cliente/profile"
+          element={
+            <ProtectedRoute>
+              <ClientProfile />
+            </ProtectedRoute>
           }
         />
 

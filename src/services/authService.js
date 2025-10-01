@@ -98,3 +98,27 @@ export const logout = () => {
   localStorage.removeItem('token');
   localStorage.removeItem('usuario');
 };
+
+export const updateProfile = async (id, userData, token) => {
+  try {
+    const response = await fetch(`http://localhost:4000/api/usuarios/usuarios/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(userData),
+    });
+
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.message || 'Error al actualizar el perfil');
+    }
+    
+    return data;
+  } catch (error) {
+    console.error('Error al actualizar el perfil:', error);
+    throw error;
+  }
+};

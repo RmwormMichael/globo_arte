@@ -273,8 +273,8 @@ const handleAction = async () => {
                     onChange={handleInputChange}
                     disabled={loading}
                     required
-                    minLength="6"
-                    placeholder="Mínimo 6 caracteres"
+                    minLength="4"
+                    placeholder="Mínimo 4 caracteres"
                   />
                 </div>
               </div>
