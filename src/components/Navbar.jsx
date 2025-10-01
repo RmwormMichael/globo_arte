@@ -1,8 +1,13 @@
 import "../App.css";
 import logoTittle from "../assets/logo/globoTittle.png";
 import logo from "../assets/logo/logo.png";
+import { useNavigate } from "react-router-dom";
+import { useUser } from '../hooks/useUser'; 
 
-export default function Navbar({ onOpenLogin, onOpenRegister, user, onLogout }) {
+export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
+  const navigate = useNavigate();
+  const { user } = useUser(); // Obtén el usuario del contexto
+
   // Función para cerrar el navbar
   const closeNavbar = () => {
     const navbarCollapse = document.getElementById('navbarNav');
@@ -12,22 +17,10 @@ export default function Navbar({ onOpenLogin, onOpenRegister, user, onLogout }) 
     }
   };
 
-  // Función para cerrar el navbar y hacer scroll
-  const handleNavClick = (sectionId) => {
+  // Función para manejar navegación a secciones de admin
+  const handleAdminNavigation = (route) => {
     closeNavbar();
-    
-    setTimeout(() => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const yOffset = -80;
-        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        
-        window.scrollTo({
-          top: y,
-          behavior: 'smooth'
-        });
-      }
-    }, 100);
+    navigate(route);
   };
 
   // Función para manejar Login
@@ -73,31 +66,45 @@ export default function Navbar({ onOpenLogin, onOpenRegister, user, onLogout }) 
               <li className="nav-item">
                 <button
                   className="nav-link btn btn-link"
-                  onClick={() => handleNavClick('gallery')}
+                  onClick={() => navigate('/')}
                 >
-                  Gallery
-                </button>
-              </li>
-              <li className="nav-item">
-                <button
-                  className="nav-link btn btn-link"
-                  onClick={() => handleNavClick('about')}
-                >
-                  About
-                </button>
-              </li>
-              <li className="nav-item">
-                <button
-                  className="nav-link btn btn-link"
-                  onClick={() => handleNavClick('services')}
-                >
-                  Services
+                  Home
                 </button>
               </li>
 
               {/* Mostrar diferentes opciones según si está logueado o no */}
               {user ? (
                 <>
+                  {/* Opciones de Admin - solo si el usuario es admin */}
+                  {user.rol === 'admin' && (
+                    <>
+                      <li className="nav-item">
+                        <button
+                          className="nav-link btn btn-link"
+                          onClick={() => handleAdminNavigation('/admin/orders')}
+                        >
+                          Orders
+                        </button>
+                      </li>
+                      <li className="nav-item">
+                        <button
+                          className="nav-link btn btn-link"
+                          onClick={() => handleAdminNavigation('/admin/new-order')}
+                        >
+                          New Order
+                        </button>
+                      </li>
+                      <li className="nav-item">
+                        <button
+                          className="nav-link btn btn-link"
+                          onClick={() => handleAdminNavigation('/admin/users')}
+                        >
+                          Users
+                        </button>
+                      </li>
+                    </>
+                  )}
+                  
                   <li className="nav-item">
                     <span className="nav-link text-dark">
                       Hola, {user.nombre}

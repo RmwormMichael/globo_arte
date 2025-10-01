@@ -16,25 +16,22 @@ import ClientDashboard from "./pages/ClientDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import { getCurrentUser, isAuthenticated } from "./services/authService";
 import EmailConfirmed from "./pages/EmailConfirmed";
+import AdminUsers from './components/AdminUsers';
+import ProtectedRoute from './components/ProtectedRoute';
+import { UserProvider} from './context/UserProvider';
+import { useUser} from './hooks/useUser';
 
-function App() {
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      offset: 100,
-    });
-  }, []);
 
+function AppContent() {
+  const { user, setUser } = useUser(); // Usa el contexto
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [modalType, setModalType] = useState("login");
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
     if (isAuthenticated()) {
       setUser(getCurrentUser());
     }
-  }, []);
+  }, [setUser]);
 
   const handleOpenLogin = () => {
     setModalType("login");
@@ -50,18 +47,15 @@ function App() {
     setShowAuthModal(false);
   };
 
-  // CORREGIDO: Usar estado en lugar de redirección forzada
   const handleLoginSuccess = (userData) => {
     setUser(userData);
     setShowAuthModal(false);
-    // No redirigir - el componente se re-renderizará automáticamente
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
     setUser(null);
-    // No redirigir - el componente se re-renderizará automáticamente
   };
 
   return (
@@ -84,7 +78,6 @@ function App() {
           path="/"
           element={
             <div>
-              {/* Mostrar ClientDashboard si el usuario está logueado */}
               {user && user.rol === 'cliente' && (
                 <ClientDashboard user={user} />
               )}
@@ -92,7 +85,6 @@ function App() {
                 <AdminDashboard user={user} />
               )}
               
-              {/* Contenido normal para todos los usuarios */}
               <SeccionUno />
               <SectionGallery />
               <Services />
@@ -101,8 +93,34 @@ function App() {
             </div>
           }
         />
+
+        {/* Rutas de administración */}
+        <Route 
+          path="/admin/users" 
+          element={
+            <ProtectedRoute requireAdmin={true}>
+              <AdminUsers />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/admin/orders" 
+          element={
+            <ProtectedRoute requireAdmin={true}>
+              <div>Página de Orders - Próximamente</div>
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/admin/new-order" 
+          element={
+            <ProtectedRoute requireAdmin={true}>
+              <div>Página de New Order - Próximamente</div>
+            </ProtectedRoute>
+          } 
+        />
         
-        {/* Rutas separadas si aún las necesitas */}
+        {/* Rutas separadas */}
         <Route 
           path="/cliente" 
           element={
@@ -125,6 +143,22 @@ function App() {
       <Footer/>
       <ScrollToTop />
     </BrowserRouter>
+  );
+}
+
+function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      offset: 100,
+    });
+  }, []);
+
+  return (
+    <UserProvider>
+      <AppContent />
+    </UserProvider>
   );
 }
 
