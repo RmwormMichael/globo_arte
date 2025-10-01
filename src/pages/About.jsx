@@ -3,7 +3,7 @@ import historia from '../assets/logo/historia.png';
 export default function About() {
   return (
     <section className="section2" id="about">
-      <div className="parrafoPrimero" data-aos="zoom-out">
+      <div className="parrafoSegundo" data-aos="zoom-out">
         <img src={historia} className="globoTittle about" alt="Historia de Globo Arte" />
         <div>
           <p>

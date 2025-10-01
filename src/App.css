@@ -201,6 +201,23 @@ body {
     max-width: 500px; /* Ancho máximo */
 }
 
+.parrafoSegundo {
+    backdrop-filter: blur(4px);
+    background-color: #eeeeee4d;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0 3rem; /* Quitamos el margen vertical excesivo */
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0px 20px 10px rgba(0, 0, 0, 0.405);
+    transition: all 0.5s ease;
+    overflow: hidden;
+    transition: transform 0.4s ease, transform 0.4s ease-in-out;
+    width: 80%; /* Limitar ancho del párrafo */
+    max-width: 500px; /* Ancho máximo */
+}
+
 .parrafoPrimero:hover {
     box-shadow: 0px 20px 10px rgba(0, 0, 0, 0.1);
     transition: all 1s ease;
@@ -448,9 +465,8 @@ img {
 .footerDos {
     display: flex;
     justify-content: flex-start;
-    gap: 30vh;
+    gap: 20vh;
     margin-top: 20px;
-    margin-left: 10vh;
 }
 
 .dateFooter {
@@ -554,8 +570,7 @@ img {
     }
     
     .footerDos {
-        gap: 6vh;
-        margin-left: 5vh;
+        gap: 4vh;
     }
 }
 
@@ -588,7 +603,7 @@ img {
     }
     
     .parrafoPrimero {
-        width: 100%;
+        width: 60%;
         max-width: 100%;
         margin: 0;
     }
@@ -617,7 +632,7 @@ img {
     }
     
     .servicesWrapper {
-        width: 95%; /* Más ancho en móvil */
+        width: 75%; /* Más ancho en móvil */
     }
     
     .navCategory {
@@ -653,6 +668,11 @@ img {
     .parrafoPrimero {
         padding: 15px;
         font-size: 0.9rem;
+        width: 45%;
+    }
+
+    .parrafoSegundo{
+        width: 60%;
     }
     
     .section2 {
@@ -664,7 +684,7 @@ img {
     }
     
     .servicesWrapper {
-        width: 100%;
+        width: 60%;
     }
     
     .botonSubir {
