@@ -603,7 +603,7 @@ img {
     }
     
     .parrafoPrimero {
-        width: 60%;
+        width: 70%;
         max-width: 100%;
         margin: 0;
     }
@@ -668,7 +668,7 @@ img {
     .parrafoPrimero {
         padding: 15px;
         font-size: 0.9rem;
-        width: 45%;
+        width: 60%;
     }
 
     .parrafoSegundo{
@@ -684,7 +684,7 @@ img {
     }
     
     .servicesWrapper {
-        width: 60%;
+        width: 70%;
     }
     
     .botonSubir {
