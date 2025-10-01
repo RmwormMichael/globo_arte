@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import GalleryGrid from './GalleryGrid';
-import '../App.css';
+import { useState } from "react";
+import GalleryGrid from "./GalleryGrid";
+import "../App.css";
 
 // Datos de las imágenes - centralizado y fácil de mantener
 const categoriesData = {
@@ -15,8 +15,8 @@ const categoriesData = {
       { src: "/src/assets/img/arcos/7.jpg", alt: "Arco decorativo 7" },
       { src: "/src/assets/img/arcos/8.jpg", alt: "Arco decorativo 8" },
       { src: "/src/assets/img/arcos/9.jpg", alt: "Arco decorativo 9" },
-      { src: "/src/assets/img/arcos/10.jpg", alt: "Arco decorativo 10" }
-    ]
+      { src: "/src/assets/img/arcos/10.jpg", alt: "Arco decorativo 10" },
+    ],
   },
   bouquets: {
     images: [
@@ -29,8 +29,8 @@ const categoriesData = {
       { src: "/src/assets/img/bouquets/7.jpg", alt: "Bouquet 7" },
       { src: "/src/assets/img/bouquets/8.jpg", alt: "Bouquet 8" },
       { src: "/src/assets/img/bouquets/9.jpg", alt: "Bouquet 9" },
-      { src: "/src/assets/img/bouquets/10.jpg", alt: "Bouquet 10" }
-    ]
+      { src: "/src/assets/img/bouquets/10.jpg", alt: "Bouquet 10" },
+    ],
   },
   diseños: {
     images: [
@@ -43,44 +43,57 @@ const categoriesData = {
       { src: "/src/assets/img/especializados/7.jpg", alt: "Diseño especial 7" },
       { src: "/src/assets/img/especializados/8.jpg", alt: "Diseño especial 8" },
       { src: "/src/assets/img/especializados/9.jpg", alt: "Diseño especial 9" },
-      { src: "/src/assets/img/especializados/10.jpg", alt: "Diseño especial 10" }
-    ]
-  }
+      {
+        src: "/src/assets/img/especializados/10.jpg",
+        alt: "Diseño especial 10",
+      },
+    ],
+  },
 };
 
 export default function TemplatesGallery() {
-  const [activeCategory, setActiveCategory] = useState('arcos');
+  const [activeCategory, setActiveCategory] = useState("arcos");
 
   return (
-    <div className='contenedorDos' id="gallery" 
-    >
+    <div className="contenedorDos" id="gallery">
       {/* Navegación de categorías */}
       <nav className="navCategory">
-        <button 
-          className={`btn btn-light ${activeCategory === 'arcos' ? 'active' : ''}`}
-          onClick={() => setActiveCategory('arcos')}
+        <button
+          className={`btn btn-light ${
+            activeCategory === "arcos" ? "active" : ""
+          }`}
+          onClick={() => setActiveCategory("arcos")}
         >
           Arcos
         </button>
-        <button 
-          className={`btn btn-light ${activeCategory === 'bouquets' ? 'active' : ''}`}
-          onClick={() => setActiveCategory('bouquets')}
+        <button
+          className={`btn btn-light ${
+            activeCategory === "bouquets" ? "active" : ""
+          }`}
+          onClick={() => setActiveCategory("bouquets")}
         >
           Bouquets
         </button>
-        <button 
-          className={`btn btn-light ${activeCategory === 'diseños' ? 'active' : ''}`}
-          onClick={() => setActiveCategory('diseños')}
+        <button
+          className={`btn btn-light ${
+            activeCategory === "diseños" ? "active" : ""
+          }`}
+          onClick={() => setActiveCategory("diseños")}
         >
           Diseños Especiales
         </button>
       </nav>
 
       {/* Galería dinámica */}
-      <div id="mainCategory" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
-        <GalleryGrid 
-          category={activeCategory} 
-          images={categoriesData[activeCategory].images} 
+      <div
+        id="mainCategory"
+        data-aos="fade-right"
+        data-aos-offset="300"
+        data-aos-easing="ease-in-sine"
+      >
+        <GalleryGrid
+          category={activeCategory}
+          images={categoriesData[activeCategory].images}
         />
       </div>
     </div>

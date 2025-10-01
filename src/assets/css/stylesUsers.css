@@ -1,0 +1,90 @@
+/* General - MEJORAS AÑADIDAS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: 640;
+}
+
+:root {
+    --primario: #f7aaaa;
+}
+
+.usersContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; /* o space-between */
+    padding: 20px;
+}
+
+.fondo{
+    background-image: url(../img/fondoUno.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.card {
+    width: calc(50% - 10px); /* Para 2 columnas con gap de 20px */
+    min-width: 300px; /* Ancho mínimo para responsividad */
+    margin-bottom: 20px;
+}
+
+.cardTittle {
+    display: flex;
+    gap: 25px;
+    border-bottom: solid;
+    margin-bottom: 2vh;
+    justify-content: space-between;
+}
+
+/* ***************************SALES************************/
+.newSalesContainer {
+    width: 65vh;
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+    margin: 7rem auto;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffffc7;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+}
+
+.newSalesForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.newSalesForm label {
+    font-size: var(--text);
+    color: #444;
+    font-weight: 500;
+}
+
+.newSalesForm input[type="text"],
+.newSalesForm textarea,
+.newSalesForm input[type="date"] {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: var(--simpleTesxt);
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.newSalesForm textarea {
+    resize: vertical;
+    min-height: 120px;
+}

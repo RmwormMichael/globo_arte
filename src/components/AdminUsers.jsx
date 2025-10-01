@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
+import "../assets/css/stylesUsers.css"
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
@@ -169,7 +170,7 @@ const AdminUsers = () => {
   };
 
   return (
-    <div className="usersContainer">
+    <div className="usersContainer fondo">
       <h2>Gestión de Usuarios</h2>
 
       {/* Barra de búsqueda */}

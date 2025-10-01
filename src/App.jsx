@@ -9,18 +9,19 @@ import Services from "./pages/Services";
 import About from "./pages/About";
 import TemplatesGallery from "./pages/TemplateGallery";
 import Footer from "./components/Footer";
-import ScrollToTop from './components/ScrollToTop';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import ScrollToTop from "./components/ScrollToTop";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import ClientDashboard from "./pages/ClientDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import { getCurrentUser, isAuthenticated } from "./services/authService";
 import EmailConfirmed from "./pages/EmailConfirmed";
-import AdminUsers from './components/AdminUsers';
-import ProtectedRoute from './components/ProtectedRoute';
-import { UserProvider} from './context/UserProvider';
-import { useUser} from './hooks/useUser';
-
+import AdminUsers from "./components/AdminUsers";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { UserProvider } from "./context/UserProvider";
+import { useUser } from "./hooks/useUser";
+import NewOrderForm from "./components/NewOrderForm";
+import OrdersList from "./components/OrdersList";
 
 function AppContent() {
   const { user, setUser } = useUser();
@@ -53,8 +54,8 @@ function AppContent() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('usuario');
+    localStorage.removeItem("token");
+    localStorage.removeItem("usuario");
     setUser(null);
   };
 
@@ -71,19 +72,17 @@ function AppContent() {
         initialForm={modalType}
         onLoginSuccess={handleLoginSuccess}
       />
-      
+
       <Routes>
         <Route
           path="/"
           element={
             <div>
-              {user && user.rol === 'cliente' && (
+              {user && user.rol === "cliente" && (
                 <ClientDashboard user={user} />
               )}
-              {user && user.rol === 'admin' && (
-                <AdminDashboard user={user} />
-              )}
-              
+              {user && user.rol === "admin" && <AdminDashboard user={user} />}
+
               <SeccionUno />
               <SectionGallery />
               <Services />
@@ -94,52 +93,56 @@ function AppContent() {
         />
 
         {/* Rutas de administración */}
-        <Route 
-          path="/admin/users" 
+        <Route
+          path="/admin/users"
           element={
             <ProtectedRoute requireAdmin={true}>
               <AdminUsers />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="/admin/orders" 
+        <Route
+          path="/admin/orders"
           element={
             <ProtectedRoute requireAdmin={true}>
-              <div>Página de Orders - Próximamente</div>
+              <OrdersList />
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="/admin/new-order" 
+        <Route
+          path="/admin/new-order"
           element={
             <ProtectedRoute requireAdmin={true}>
-              <div>Página de New Order - Próximamente</div>
+              <NewOrderForm />
             </ProtectedRoute>
-          } 
+          }
         />
-        
+
         {/* Rutas separadas */}
-        <Route 
-          path="/cliente" 
+        <Route
+          path="/cliente"
           element={
-            user && user.rol === 'cliente' ? 
-            <ClientDashboard user={user} /> : 
-            <Navigate to="/" replace />
-          } 
+            user && user.rol === "cliente" ? (
+              <ClientDashboard user={user} />
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
         />
-        <Route 
-          path="/admin" 
+        <Route
+          path="/admin"
           element={
-            user && user.rol === 'admin' ? 
-            <AdminDashboard user={user} /> : 
-            <Navigate to="/" replace />
-          } 
+            user && user.rol === "admin" ? (
+              <AdminDashboard user={user} />
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
         />
         <Route path="/confirmado" element={<EmailConfirmed />} />
       </Routes>
-      
-      <Footer/>
+
+      <Footer />
       <ScrollToTop />
     </BrowserRouter>
   );
