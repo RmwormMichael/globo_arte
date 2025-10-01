@@ -94,7 +94,7 @@ function App() {
               
               {/* Contenido normal para todos los usuarios */}
               <SeccionUno />
-
+              <SectionGallery />
               <Services />
               <About />
               <TemplatesGallery />
