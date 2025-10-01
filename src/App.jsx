@@ -23,7 +23,7 @@ import { useUser} from './hooks/useUser';
 
 
 function AppContent() {
-  const { user, setUser } = useUser(); // Usa el contexto
+  const { user, setUser } = useUser();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [modalType, setModalType] = useState("login");
 
@@ -63,7 +63,6 @@ function AppContent() {
       <Navbar
         onOpenLogin={handleOpenLogin}
         onOpenRegister={handleOpenRegister}
-        user={user}
         onLogout={handleLogout}
       />
       <AuthModal

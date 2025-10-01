@@ -6,7 +6,7 @@ import { useUser } from '../hooks/useUser';
 
 export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
   const navigate = useNavigate();
-  const { user } = useUser(); // Obtén el usuario del contexto
+  const { user } = useUser();
 
   // Función para cerrar el navbar
   const closeNavbar = () => {
@@ -37,6 +37,23 @@ export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
     onOpenRegister();
   };
 
+  // Función genérica para navegar a secciones
+  const navigateToSection = (sectionId) => {
+    closeNavbar();
+    navigate('/');
+    // Pequeño delay para asegurar que la navegación se complete
+    setTimeout(() => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }, 100);
+  };
+
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -63,12 +80,32 @@ export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
           {/* Menú colapsable */}
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
+
+
               <li className="nav-item">
                 <button
                   className="nav-link btn btn-link"
-                  onClick={() => navigate('/')}
+                  onClick={() => navigateToSection('gallery')}
                 >
-                  Home
+                  Galería
+                </button>
+              </li>
+
+              <li className="nav-item">
+                <button
+                  className="nav-link btn btn-link"
+                  onClick={() => navigateToSection('services')}
+                >
+                  Servicios
+                </button>
+              </li>
+
+              <li className="nav-item">
+                <button
+                  className="nav-link btn btn-link"
+                  onClick={() => navigateToSection('about')}
+                >
+                  Nosotros
                 </button>
               </li>
 
