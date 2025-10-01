@@ -15,7 +15,7 @@ export default function ServicesSection() {
         />
       </h1>
       <div className="servicesWrapper" >
-        <div className="service" data-aos="fade-down-right">
+        <div className="service" data-aos="fade-down-right" data-aos-duration="5000">
           <img src={globoArco} alt="Globos con Helio" />
           <h4>Globos con Helio</h4>
           <p>
@@ -24,7 +24,7 @@ export default function ServicesSection() {
             celebración sea aún más especial con globos que se elevan por sí solos!
           </p>
         </div>
-        <div className="service" data-aos="fade-up-left">
+        <div className="service" data-aos="fade-up-left" data-aos-duration="5000">
           <img src={bouquets} alt="Bouquets" />
           <h4>Bouquets</h4>
           <p>
@@ -33,7 +33,7 @@ export default function ServicesSection() {
             con elegancia y creatividad!
           </p>
         </div>
-        <div className="service" data-aos="zoom-in-up">
+        <div className="service" data-aos="zoom-in-up" data-aos-duration="5000">
           <img src={disenosEspeciales} alt="Diseños Especiales" />
           <h4>Diseños Especiales</h4>
           <p>

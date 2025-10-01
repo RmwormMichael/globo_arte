@@ -10,13 +10,13 @@ export default function SeccionUno() {
           alt="logo grande"
           data-aos="fade-up" 
           data-aos-anchor-placement="bottom-bottom" 
-          data-aos-duration="10500" 
+          data-aos-duration="5000" 
         />
         <p 
           className="parrafoPrimero" 
           data-aos="fade-down" 
           data-aos-easing="linear" 
-          data-aos-duration="10500"
+          data-aos-duration="5000"
         >
           En nuestra empresa nos especializamos en la decoración con globos,
           creando experiencias únicas para eventos familiares y corporativos. Nos
