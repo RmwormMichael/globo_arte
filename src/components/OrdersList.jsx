@@ -1,6 +1,7 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getOrders, getUsers, updateOrder, deleteOrder } from '../services/orderService';
 import Swal from 'sweetalert2';
+import 'hover.css/css/hover-min.css';
 
 const OrdersList = () => {
   const [orders, setOrders] = useState([]);
@@ -9,7 +10,6 @@ const OrdersList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
   const [editingOrder, setEditingOrder] = useState(null);
-  const [showEditModal, setShowEditModal] = useState(false);
   const [editForm, setEditForm] = useState({
     description: '',
     direction: '',
@@ -91,16 +91,17 @@ const OrdersList = () => {
       // Buscar por descripción
       if (order.description.toLowerCase().includes(term)) return true;
       
+      // Buscar por estado
+      if (statusMap[order.status]?.toLowerCase().includes(term)) return true;
+      
       return false;
     });
 
     setFilteredOrders(filtered);
   };
 
-  const handleSearch = (e) => {
-    if (e.key === 'Enter' || e.type === 'click') {
-      filterOrders();
-    }
+  const handleSearch = () => {
+    filterOrders();
   };
 
   const formatDate = (dateStr) => {
@@ -113,7 +114,7 @@ const OrdersList = () => {
       .padStart(2, '0')}`;
   };
 
-  const handleEditClick = (order) => {
+  const handleEdit = (order) => {
     setEditingOrder(order);
     
     const orderDate = new Date(order.date_order);
@@ -125,11 +126,9 @@ const OrdersList = () => {
       date_order: formattedDate,
       status: order.status || 'en_proceso'
     });
-    
-    setShowEditModal(true);
   };
 
-  const handleDeleteClick = async (orderId) => {
+  const handleDelete = async (orderId) => {
     const token = localStorage.getItem('token');
     if (!token) {
       showAuthError();
@@ -172,15 +171,7 @@ const OrdersList = () => {
     }
   };
 
-  const handleEditFormChange = (e) => {
-    const { name, value } = e.target;
-    setEditForm(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSaveChanges = async () => {
+  const handleSave = async () => {
     if (!editingOrder) return;
 
     const token = localStorage.getItem('token');
@@ -206,7 +197,6 @@ const OrdersList = () => {
         )
       );
 
-      setShowEditModal(false);
       setEditingOrder(null);
       
       Swal.fire({
@@ -231,6 +221,22 @@ const OrdersList = () => {
     return user ? user.nombre : 'Usuario no encontrado';
   };
 
+  // Función para obtener clase de badge según el estado
+  const getStatusBadgeClass = (status) => {
+    switch (status) {
+      case 'entregado':
+        return 'bg-success';
+      case 'en_proceso':
+        return 'bg-primary';
+      case 'pendiente':
+        return 'bg-warning';
+      case 'cancelado':
+        return 'bg-danger';
+      default:
+        return 'bg-secondary';
+    }
+  };
+
   if (loading) {
     return (
       <div className="container mt-4">
@@ -244,9 +250,9 @@ const OrdersList = () => {
   }
 
   return (
-    <div className="container fondo">
-      <h2>Lista de Órdenes</h2>
-      
+    <div className="usersContainer fondo">
+      <h2>Gestión de Órdenes</h2>
+
       {/* Barra de búsqueda */}
       <div className="input-group mb-3">
         <button 
@@ -259,131 +265,148 @@ const OrdersList = () => {
         <input 
           type="text" 
           className="form-control" 
-          placeholder="Buscar orden por ID o nombre de usuario"
+          placeholder="Buscar orden por ID, usuario, descripción o estado"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyUp={handleSearch}
+          onKeyUp={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
         />
       </div>
 
-      {/* Lista de órdenes */}
-      <div className="row">
-        {filteredOrders.map((order) => (
-          <div key={order.id_order} className="col-md-6 col-lg-4 mb-3">
-            <div className="card h-100">
-              <div className="card-body">
-                <div className="cardTittle d-flex justify-content-between">
-                  <h5 className="order-id">ID: {order.id_order}</h5>
-                  <h5 className="user-name">{getUserName(order.id_user)}</h5>
-                </div>
-                <h6>Descripción:</h6>
-                <p className="cardDescription">{order.description}</p>
-              </div>
-              <ul className="list-group list-group-flush">
-                <li className="list-group-item">
-                  <strong>Dirección:</strong> {order.direction}
-                </li>
-                <li className="list-group-item">
-                  <strong>Creado:</strong> {formatDate(order.order_created_at)}
-                </li>
-                <li className="list-group-item">
-                  <strong>Entrega:</strong> {formatDate(order.date_order)}
-                </li>
-                <li className="list-group-item">
-                  <strong>Estado:</strong> {statusMap[order.status] || order.status}
-                </li>
-              </ul>
-              <div className="card-body">
-                <button 
-                  className="btn btn-outline-secondary me-2"
-                  onClick={() => handleEditClick(order)}
-                >
-                  Editar
-                </button>
-                <button 
-                  type="button" 
-                  className="btn btn-outline-danger"
-                  onClick={() => handleDeleteClick(order.id_order)}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash3-fill" viewBox="0 0 16 16">
-                    <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
-                  </svg>
-                </button>
-              </div>
-            </div>
+      {/* Tabla de órdenes */}
+      <div className="table-responsive">
+        <table className="table table-striped table-hover">
+          <thead className="table-dark">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Usuario</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Dirección</th>
+              <th scope="col">Fecha Creación</th>
+              <th scope="col">Fecha Entrega</th>
+              <th scope="col">Estado</th>
+              <th scope="col" className="text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody className="table-group-divider">
+            {filteredOrders.map(order => (
+              <tr key={order.id_order}>
+                <th className='row-table align-middle' scope="row">{order.id_order}</th>
+                <td className="align-middle">{getUserName(order.id_user)}</td>
+                <td className="align-middle">
+                  <div style={{maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                    {order.description}
+                  </div>
+                </td>
+                <td className="align-middle">
+                  <div style={{maxWidth: '150px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+                    {order.direction}
+                  </div>
+                </td>
+                <td className="align-middle">{formatDate(order.order_created_at)}</td>
+                <td className="align-middle">{formatDate(order.date_order)}</td>
+                <td className="align-middle">
+                  <span className={`badge ${getStatusBadgeClass(order.status)}`}>
+                    {statusMap[order.status] || order.status}
+                  </span>
+                </td>
+                <td className="text-center align-middle">
+                  <button 
+                    type="button" 
+                    className="btn btn-outline-info btn-editar btn-sm me-2 hvr-icon-pulse"
+                    onClick={() => handleEdit(order)}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil hvr-icon" viewBox="0 0 16 16">
+                      <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                    </svg>
+                    Editar
+                  </button>
+                  <button 
+                    type="button" 
+                    className="btn btn-outline-danger btn-eliminar btn-sm hvr-icon-pulse"
+                    onClick={() => handleDelete(order.id_order)}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash3-fill hvr-icon icon-eliminar" viewBox="0 0 16 16">
+                      <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+                    </svg>
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        {filteredOrders.length === 0 && (
+          <div className="text-center py-4">
+            <p className="text-muted">No se encontraron órdenes</p>
           </div>
-        ))}
+        )}
       </div>
 
-      {filteredOrders.length === 0 && (
-        <div className="text-center mt-4">
-          <p>No se encontraron órdenes.</p>
-        </div>
-      )}
-
       {/* Modal de edición */}
-      {showEditModal && (
-        <div className="modal show d-block" tabIndex="-1" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
-          <div className="modal-dialog">
+      {editingOrder && (
+        <div className="modal show d-block" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
+          <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Editar Orden</h5>
+                <h1 className="modal-title fs-5">Editar Orden #{editingOrder.id_order}</h1>
                 <button 
                   type="button" 
                   className="btn-close" 
-                  onClick={() => setShowEditModal(false)}
+                  onClick={() => setEditingOrder(null)}
                 ></button>
               </div>
               <div className="modal-body">
-                <form className="row g-3 needs-validation">
-                  <div className="col-md-12">
-                    <label htmlFor="editDescription" className="form-label">Descripción</label>
+                <form>
+                  <div className="mb-3">
+                    <label htmlFor="description" className="form-label">Descripción</label>
                     <textarea 
                       className="form-control" 
-                      id="editDescription" 
-                      name="description"
+                      id="description" 
+                      rows="3"
                       value={editForm.description}
-                      onChange={handleEditFormChange}
-                      required
-                    ></textarea>
+                      onChange={(e) => setEditForm({...editForm, description: e.target.value})}
+                      required 
+                    />
                   </div>
-                  <div className="col-md-12">
-                    <label htmlFor="editDirection" className="form-label">Dirección</label>
+                  <div className="mb-3">
+                    <label htmlFor="direction" className="form-label">Dirección</label>
                     <input 
                       type="text" 
                       className="form-control" 
-                      id="editDirection" 
-                      name="direction"
+                      id="direction" 
                       value={editForm.direction}
-                      onChange={handleEditFormChange}
-                      required
+                      onChange={(e) => setEditForm({...editForm, direction: e.target.value})}
+                      required 
                     />
                   </div>
-                  <div className="col-md-12">
-                    <label htmlFor="editDeliveryDate" className="form-label">Fecha de Entrega</label>
+                  <div className="mb-3">
+                    <label htmlFor="date_order" className="form-label">Fecha de Entrega</label>
                     <input 
                       type="datetime-local" 
                       className="form-control" 
-                      id="editDeliveryDate" 
-                      name="date_order"
+                      id="date_order" 
                       value={editForm.date_order}
-                      onChange={handleEditFormChange}
-                      required
+                      onChange={(e) => setEditForm({...editForm, date_order: e.target.value})}
+                      required 
                     />
                   </div>
-                  <div className="col-md-12">
-                    <label htmlFor="editStatus" className="form-label">Estado</label>
+                  <div className="mb-3">
+                    <label htmlFor="status" className="form-label">Estado</label>
                     <select 
                       className="form-select" 
-                      id="editStatus" 
-                      name="status"
+                      id="status" 
                       value={editForm.status}
-                      onChange={handleEditFormChange}
+                      onChange={(e) => setEditForm({...editForm, status: e.target.value})}
                       required
                     >
+                      <option value="pendiente">Pendiente</option>
                       <option value="en_proceso">En proceso</option>
                       <option value="entregado">Entregado</option>
-                      <option value="pendiente">Pendiente</option>
                       <option value="cancelado">Cancelado</option>
                     </select>
                   </div>
@@ -393,16 +416,16 @@ const OrdersList = () => {
                 <button 
                   type="button" 
                   className="btn btn-secondary" 
-                  onClick={() => setShowEditModal(false)}
+                  onClick={() => setEditingOrder(null)}
                 >
-                  Cerrar
+                  Cancelar
                 </button>
                 <button 
                   type="button" 
                   className="btn btn-primary" 
-                  onClick={handleSaveChanges}
+                  onClick={handleSave}
                 >
-                  Guardar Cambios
+                  Guardar cambios
                 </button>
               </div>
             </div>
