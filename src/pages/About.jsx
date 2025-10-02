@@ -4,7 +4,7 @@ export default function About() {
   return (
     <section className="section2" id="about">
       <div className="parrafoSegundo" data-aos="zoom-out">
-        <img src={historia} className="globoTittle about" alt="Historia de Globo Arte" />
+        <img src={historia} className="globoTittle about animate__animated animate__zoomInRight" alt="Historia de Globo Arte" />
         <div>
           <p>
             <br /> Todo comenzó decorando pequeñas celebraciones para familiares y amigos, con globos, creatividad y muchas ganas de sorprender. Poco a poco, esa pasión por embellecer momentos especiales se transformó en una idea más grande: llevar alegría y color a cada rincón. <br /> <br />

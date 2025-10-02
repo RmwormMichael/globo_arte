@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import productosDestacados from '../assets/logo/productosDestacados.png';
 
 // Importar Bootstrap JS
@@ -35,7 +35,7 @@ export default function SectionGallery() {
 
   return (
     <section className="galeria">
-      <div className="tituloImagen">
+      <div className="tituloImagen animate__animated animate__fadeInRight" >
         <img 
           src={productosDestacados}
           alt="Productos Destacados" 

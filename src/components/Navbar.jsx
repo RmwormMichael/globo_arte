@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../hooks/useUser";
 import { useEffect, useRef } from "react";
 
-
 export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
   const navigate = useNavigate();
   const { user } = useUser();
@@ -34,7 +33,7 @@ export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
 
     // Agregar event listener cuando el componente se monta
     document.addEventListener("mousedown", handleClickOutside);
-    
+
     // Limpiar event listener cuando el componente se desmonta
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -107,8 +106,16 @@ export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
         <div className="container-fluid">
           {/* Contenedor para logo y título */}
           <div className="d-flex align-items-center">
-<img src={logo} className="logo animate__animated animate__zoomInUp" alt="Logo" />
-<img src={logoTittle} className="globoTittle animate__animated animate__lightSpeedInRight" alt="Globo Arte" />
+            <img
+              src={logo}
+              className="logo animate__animated animate__zoomInUp"
+              alt="Logo"
+            />
+            <img
+              src={logoTittle}
+              className="globoTittle animate__animated animate__lightSpeedInRight"
+              alt="Globo Arte"
+            />
           </div>
 
           {/* Botón toggler */}

@@ -11,7 +11,7 @@ export default function ServicesSection() {
         <img 
           src={nuestrosServicios} 
           alt="Nuestros Servicios" 
-          className="tituloImagen" 
+          className="tituloImagen animate__animated animate__jackInTheBox" 
         />
       </h1>
       <div className="servicesWrapper" >
