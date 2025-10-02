@@ -25,6 +25,8 @@ import OrdersList from "./components/OrdersList";
 import ClientOrders from "./components/ClientOrders";
 import NewOrderFormClient from "./components/NewOrderFormClient";
 import ClientProfile from "./components/ClientProfile";
+import 'animate.css';
+import 'hover.css';
 
 function AppContent() {
   const { user, setUser } = useUser();

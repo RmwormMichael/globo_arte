@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../hooks/useUser";
 import { useEffect, useRef } from "react";
 
+
 export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
   const navigate = useNavigate();
   const { user } = useUser();

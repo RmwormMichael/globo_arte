@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "animate.css": "^4.1.1",
     "aos": "^2.3.4",
     "bootstrap": "^5.3.8",
+    "hover.css": "^2.3.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.3",
