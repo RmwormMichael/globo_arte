@@ -59,7 +59,7 @@ export default function TemplatesGallery() {
       {/* Navegación de categorías */}
       <nav className="navCategory">
         <button
-          className={`btn btn-light ${
+          className={`btn btn-light hvr-buzz-out ${
             activeCategory === "arcos" ? "active" : ""
           }`}
           onClick={() => setActiveCategory("arcos")}
@@ -67,7 +67,7 @@ export default function TemplatesGallery() {
           Arcos
         </button>
         <button
-          className={`btn btn-light ${
+          className={`btn btn-light hvr-buzz-out ${
             activeCategory === "bouquets" ? "active" : ""
           }`}
           onClick={() => setActiveCategory("bouquets")}
@@ -75,7 +75,7 @@ export default function TemplatesGallery() {
           Bouquets
         </button>
         <button
-          className={`btn btn-light ${
+          className={`btn btn-light hvr-buzz-out ${
             activeCategory === "diseños" ? "active" : ""
           }`}
           onClick={() => setActiveCategory("diseños")}

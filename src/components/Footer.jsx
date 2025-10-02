@@ -15,13 +15,13 @@ export default function Footer() {
         </div>
         <div className="footerDos">
           <a href="https://www.facebook.com/share/1DfwVBr9ZL/" target="_blank" rel="noopener noreferrer">
-            <img className="imgContact" src={facebook} alt="Facebook" />
+            <img className="imgContact hvr-wobble-top" src={facebook} alt="Facebook" />
           </a>
           <a href="https://wa.me/3142119946" target="_blank" rel="noopener noreferrer">
-            <img className="imgContact" src={whatsapp} alt="WhatsApp" />
+            <img className="imgContact hvr-wobble-top" src={whatsapp} alt="WhatsApp" />
           </a>
           <a href="https://www.instagram.com/globo_arte_marthaperez?igsh=d3YycG52cDFyNWNw" target="_blank" rel="noopener noreferrer">
-            <img className="imgContact" src={instagram} alt="Instagram" />
+            <img className="imgContact hvr-wobble-top" src={instagram} alt="Instagram" />
           </a>
         </div>
       </div>

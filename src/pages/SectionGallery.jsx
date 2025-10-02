@@ -102,8 +102,8 @@ export default function SectionGallery() {
         </button>
       </div>
 
-      <div className="divCuadro" id="sectGallery">
-        <a className="cuadroGallery" href="#gallery">
+      <div className="divCuadro " id="sectGallery">
+        <a className="cuadroGallery hvr-buzz-out" href="#gallery">
           Click aqui para ver mas diseños!
         </a>
       </div>

@@ -107,8 +107,8 @@ export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
         <div className="container-fluid">
           {/* Contenedor para logo y título */}
           <div className="d-flex align-items-center">
-            <img src={logo} className="logo" alt="Logo" />
-            <img src={logoTittle} className="globoTittle" alt="Globo Arte" />
+<img src={logo} className="logo animate__animated animate__zoomInUp" alt="Logo" />
+<img src={logoTittle} className="globoTittle animate__animated animate__lightSpeedInRight" alt="Globo Arte" />
           </div>
 
           {/* Botón toggler */}
@@ -229,7 +229,7 @@ export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
                   )}
 
                   <li className="nav-item">
-                    <span className="nav-link text-dark">
+                    <span className="nav-link text-dark hvr-wobble-horizontal">
                       Hola, {user.nombre}
                     </span>
                   </li>
