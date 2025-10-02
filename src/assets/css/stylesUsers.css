@@ -14,11 +14,14 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: center; /* o space-between */
+    justify-content: center;
     padding: 20px;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
 }
 
-.fondo{
+.fondo {
     background-image: url(../img/fondoUno.jpg);
     background-size: cover;
     background-position: center;
@@ -27,8 +30,10 @@
 }
 
 .card {
-    width: calc(50% - 10px); /* Para 2 columnas con gap de 20px */
-    min-width: 300px; /* Ancho mínimo para responsividad */
+    width: calc(50% - 10px);
+    /* Para 2 columnas con gap de 20px */
+    min-width: 300px;
+    /* Ancho mínimo para responsividad */
     margin-bottom: 20px;
 }
 
@@ -38,6 +43,50 @@
     border-bottom: solid;
     margin-bottom: 2vh;
     justify-content: space-between;
+}
+
+.input-group {
+    max-width: 60%;
+    max-height: 50px;
+}
+
+/* Estilos adicionales para la tabla de usuarios */
+.table-responsive {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table th {
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* Badges personalizados */
+.badge.bg-danger {
+    background-color: #dc3545 !important;
+}
+
+.badge.bg-primary {
+    background-color: #0d6efd !important;
+}
+
+/* Botones de acción */
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Efectos hover en filas */
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.row-table{
+    text-align: center;
 }
 
 /* ***************************SALES************************/
@@ -87,4 +136,28 @@
 .newSalesForm textarea {
     resize: vertical;
     min-height: 120px;
+}
+
+@media (max-width: 800px){
+.btn-editar{
+    min-width: 70px;
+}
+
+.btn-eliminar{
+    display: flex;
+    flex-direction: row;
+    max-width: 110px;
+    max-height: 40px;
+    margin-top: 7px;
+}
+
+.icon-eliminar{
+    max-width: 30px;
+}
+
+.hvr-icon-pulse{
+    display: flex;
+}
+
+
 }
