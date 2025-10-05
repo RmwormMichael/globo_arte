@@ -87,7 +87,8 @@ const ClientOrders = () => {
     filterOrders();
   };
 
-  const formatDate = (dateStr) => {
+const formatDate = (dateStr) => {
+    if (!dateStr) return 'No disponible';
     const date = new Date(dateStr);
     return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1)
       .toString()
@@ -95,7 +96,7 @@ const ClientOrders = () => {
       .getMinutes()
       .toString()
       .padStart(2, '0')}`;
-  };
+};
 
   const handleEdit = (order) => {
     setEditingOrder(order);
@@ -246,7 +247,7 @@ const ClientOrders = () => {
                     {order.direction}
                   </div>
                 </td>
-                <td className="align-middle">{formatDate(order.order_created_at)}</td>
+                <td className="align-middle">{formatDate(order.date_order)}</td>
                 <td className="align-middle">{formatDate(order.date_order)}</td>
                 <td className="align-middle">
                   <span className={`badge ${getStatusBadgeClass(order.status)}`}>

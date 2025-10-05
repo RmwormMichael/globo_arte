@@ -22,7 +22,7 @@ const AdminUsers = () => {
   const loadUsers = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch("http://localhost:4000/api/usuarios/usuarios", {
+      const response = await fetch("https://api-2cvl.onrender.com/api/usuarios", {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -90,7 +90,7 @@ const AdminUsers = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:4000/api/usuarios/usuarios/${editingUser.id_user}`, {
+      const response = await fetch(`https://api-2cvl.onrender.com/api/usuarios/${editingUser.id_user}`, {
         method: "PUT",
         headers: { 
           "Content-Type": "application/json",
@@ -139,7 +139,7 @@ const AdminUsers = () => {
     if (result.isConfirmed) {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:4000/api/usuarios/usuarios/${id}`, {
+        const response = await fetch(`https://api-2cvl.onrender.com/api/usuarios/${id}`, {
           method: "DELETE",
           headers: { 
             "Content-Type": "application/json",

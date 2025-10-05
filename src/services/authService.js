@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:4000/api/usuarios/";
+const API_URL = "https://api-2cvl.onrender.com/api/usuarios/";
 
 export const loginUsuario = async (email, password) => {
   try {
@@ -101,7 +101,7 @@ export const logout = () => {
 
 export const updateProfile = async (id, userData, token) => {
   try {
-    const response = await fetch(`http://localhost:4000/api/usuarios/usuarios/${id}`, {
+    const response = await fetch(`https://api-2cvl.onrender.com/api/usuarios/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { createOrder, getUsers } from '../services/orderService';
+import { createOrder } from '../services/orderService';
+import { getUsers } from '../services/orderService';
 import Swal from 'sweetalert2';
 import "../assets/css/stylesUsers.css"
 
