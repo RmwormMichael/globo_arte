@@ -384,6 +384,8 @@ body {
     background-color: var(--primario);
 }
 
+/*****************************  SERVICIOS   ********************************/
+
 .contenedorServicios {
     display: flex;
     justify-content: space-evenly;
@@ -415,7 +417,7 @@ body {
 
 .service {
     backdrop-filter: blur(4px);
-    flex: 1 1 25rem;
+    flex: 1 1 15rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -449,6 +451,9 @@ body {
     text-align: center;
     margin: 0 4vh 10vh;
 }
+
+
+/********************************* ABOUT ***********************************************/
 
 .section2 {
     background-image: url(../src/assets/img/atres.jpg);
@@ -486,8 +491,7 @@ body {
 /* GRID - CORREGIDO PARA RESPONSIVE */
 .grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    margin-top: 30px;
+    grid-template-columns: repeat(2, 1fr);    
     padding: 6rem;
     width: 100%;
     /* Añadido */
@@ -788,11 +792,11 @@ img {
     }
 
     .section2 {
-        padding: 1rem;
+        padding: 1.5rem;
     }
 
     .grid {
-        padding: 0.5rem;
+        padding: 1rem;
     }
 
     .servicesWrapper {
@@ -804,4 +808,18 @@ img {
         height: 50px;
         right: 10%;
     }
+}
+
+/* SOLO PARA HALLOWEEN */
+.productoHalloween:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.7);
+  border: 2px solid rgba(255, 0, 0, 0.377);
+  transition: 0.3s ease-in-out;
+}
+
+/* Para productos normales */
+.producto:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
 }

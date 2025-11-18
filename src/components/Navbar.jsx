@@ -1,12 +1,13 @@
 import "../App.css";
 import logoTittle from "../assets/logo/globoTittle.png";
 import logo from "../assets/logo/logo.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "../hooks/useUser";
 import { useEffect, useRef } from "react";
 
 export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useUser();
   const navbarRef = useRef(null);
 
@@ -22,7 +23,6 @@ export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
   // Cerrar navbar cuando se hace clic fuera de él
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // Si el navbar está abierto y el clic fue fuera del navbar
       const navbarCollapse = document.getElementById("navbarNav");
       if (navbarCollapse && navbarCollapse.classList.contains("show")) {
         if (navbarRef.current && !navbarRef.current.contains(event.target)) {
@@ -31,10 +31,7 @@ export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
       }
     };
 
-    // Agregar event listener cuando el componente se monta
     document.addEventListener("mousedown", handleClickOutside);
-
-    // Limpiar event listener cuando el componente se desmonta
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -44,10 +41,8 @@ export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
   const handleToggleClick = () => {
     const navbarCollapse = document.getElementById("navbarNav");
     if (navbarCollapse && navbarCollapse.classList.contains("show")) {
-      // Si ya está abierto, cerrarlo
       closeNavbar();
     }
-    // Si está cerrado, Bootstrap lo abrirá automáticamente
   };
 
   // Función para manejar navegación a secciones de admin
@@ -79,25 +74,48 @@ export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
   // Función genérica para navegar a secciones
   const navigateToSection = (sectionId) => {
     closeNavbar();
-    navigate("/");
-    // Pequeño delay para asegurar que la navegación se complete
-    setTimeout(() => {
-      const section = document.getElementById(sectionId);
-      if (section) {
-        section.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-    }, 100);
+    
+    // Si ya estamos en la página principal, solo actualizamos el hash
+    if (location.pathname === "/") {
+      window.location.hash = sectionId;
+      
+      // Scroll a la sección
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }, 100);
+    } else {
+      // Si no estamos en la página principal, navegamos a ella con el hash
+      navigate(`/#${sectionId}`);
+      
+      // Scroll después de que la navegación se complete
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }, 500);
+    }
   };
 
-  // Función para navegar al inicio (top de la página)
+  // Función para navegar al inicio (SeccionUno)
   const handleHomeNavigation = () => {
     closeNavbar();
-    navigate("/");
-    // Scroll al top de la página
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (location.pathname === "/") {
+      window.location.hash = "home";
+      // Scroll al top para mostrar SeccionUno
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      navigate("/#home");
+    }
   };
 
   return (
@@ -135,24 +153,13 @@ export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
           {/* Menú colapsable */}
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-              {/* Mostrar botón Inicio solo cuando el usuario está logueado */}
-              {user && (
-                <li className="nav-item">
-                  <button
-                    className="nav-link btn btn-link"
-                    onClick={handleHomeNavigation}
-                  >
-                    Inicio
-                  </button>
-                </li>
-              )}
-
+              {/* Botón Inicio - siempre visible */}
               <li className="nav-item">
                 <button
                   className="nav-link btn btn-link"
-                  onClick={() => navigateToSection("sectGallery")}
+                  onClick={handleHomeNavigation}
                 >
-                  Galería
+                  Inicio
                 </button>
               </li>
 
@@ -162,6 +169,24 @@ export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
                   onClick={() => navigateToSection("services")}
                 >
                   Servicios
+                </button>
+              </li>
+
+              <li className="nav-item">
+                <button
+                  className="nav-link btn btn-link"
+                  onClick={() => navigateToSection("templates")}
+                >
+                  Templates
+                </button>
+              </li>
+
+              <li className="nav-item">
+                <button
+                  className="nav-link btn btn-link"
+                  onClick={() => navigateToSection("sectGallery")}
+                >
+                  Galería
                 </button>
               </li>
 

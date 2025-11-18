@@ -34,7 +34,7 @@ export default function SectionGallery() {
   }, []);
 
   return (
-    <section className="galeria">
+    <section className="galeria" id='sectGallery'>
       <div className="tituloImagen animate__animated animate__fadeInRight" >
         <img 
           src={productosDestacados}
@@ -102,7 +102,7 @@ export default function SectionGallery() {
         </button>
       </div>
 
-      <div className="divCuadro " id="sectGallery">
+      <div className="divCuadro " id="">
         <a className="cuadroGallery hvr-buzz-out" href="#gallery">
           Click aqui para ver mas diseños!
         </a>

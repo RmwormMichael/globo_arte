@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
@@ -27,6 +27,45 @@ import NewOrderFormClient from "./components/NewOrderFormClient";
 import ClientProfile from "./components/ClientProfile";
 import 'animate.css';
 import 'hover.css';
+
+// Componente para la página principal con navegación por secciones
+function HomePage() {
+  const location = useLocation();
+  const { user } = useUser();
+  
+  // Determinar qué sección mostrar basado en el hash de la URL
+  const getActiveSection = () => {
+    const hash = location.hash;
+    
+    switch(hash) {
+      case '#services':
+        return <Services />;
+      case '#about':
+        return <About />;
+      case '#sectGallery':
+        return <SectionGallery />;
+      case '#templates':
+        return <TemplatesGallery />;
+      case '#home':
+      case '':
+      default:
+        return <SeccionUno />;
+    }
+  };
+
+  return (
+    <div>
+      {/* Mostrar dashboard solo si está logueado */}
+      {user && user.rol === "cliente" && (
+        <ClientDashboard user={user} />
+      )}
+      {user && user.rol === "admin" && <AdminDashboard user={user} />}
+      
+      {/* Mostrar solo la sección activa */}
+      {getActiveSection()}
+    </div>
+  );
+}
 
 function AppContent() {
   const { user, setUser } = useUser();
@@ -79,23 +118,8 @@ function AppContent() {
       />
 
       <Routes>
-        <Route
-          path="/"
-          element={
-            <div>
-              {user && user.rol === "cliente" && (
-                <ClientDashboard user={user} />
-              )}
-              {user && user.rol === "admin" && <AdminDashboard user={user} />}
-
-              <SeccionUno />
-              <SectionGallery />
-              <Services />
-              <About />
-              <TemplatesGallery />
-            </div>
-          }
-        />
+        {/* Ruta principal con navegación por secciones */}
+        <Route path="/" element={<HomePage />} />
 
         {/* Rutas de Cliente */}
         <Route

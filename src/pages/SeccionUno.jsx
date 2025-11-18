@@ -2,7 +2,7 @@ import imgLogo from "../assets/logo/globoArteLogo.png";
 
 export default function SeccionUno() {
   return (
-    <div className="contenedorUno">
+    <div className="contenedorUno" id="home">
       <div className="contenido-interno">
         <img 
           src={imgLogo} 

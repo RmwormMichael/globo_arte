@@ -1,10 +1,17 @@
 import { useState } from "react";
 import GalleryGrid from "./GalleryGrid";
 import "../App.css";
+import { Eyes, Haunted } from "react-halloween";
 
-// Datos de las imágenes - centralizado y fácil de mantener
+// Importar las imágenes de fondo
+import fondoArcos from "../assets/img/fondoUno.jpg";
+import fondoBouquets from "../assets/img/fondoUno.jpg";
+import fondoDisenos from "../assets/img/halloween/halloweenTwo.jpg";
+
+// Datos de las imágenes centralizado
 const categoriesData = {
   arcos: {
+    background: fondoArcos,
     images: [
       { src: "/src/assets/img/arcos/1.jpg", alt: "Arco decorativo 1" },
       { src: "/src/assets/img/arcos/2.jpg", alt: "Arco decorativo 2" },
@@ -18,7 +25,9 @@ const categoriesData = {
       { src: "/src/assets/img/arcos/10.jpg", alt: "Arco decorativo 10" },
     ],
   },
+
   bouquets: {
+    background: fondoBouquets,
     images: [
       { src: "/src/assets/img/bouquets/1.jpg", alt: "Bouquet 1" },
       { src: "/src/assets/img/bouquets/2.jpg", alt: "Bouquet 2" },
@@ -32,7 +41,9 @@ const categoriesData = {
       { src: "/src/assets/img/bouquets/10.jpg", alt: "Bouquet 10" },
     ],
   },
+
   diseños: {
+    background: fondoDisenos,
     images: [
       { src: "/src/assets/img/especializados/1.jpg", alt: "Diseño especial 1" },
       { src: "/src/assets/img/especializados/2.jpg", alt: "Diseño especial 2" },
@@ -43,10 +54,7 @@ const categoriesData = {
       { src: "/src/assets/img/especializados/7.jpg", alt: "Diseño especial 7" },
       { src: "/src/assets/img/especializados/8.jpg", alt: "Diseño especial 8" },
       { src: "/src/assets/img/especializados/9.jpg", alt: "Diseño especial 9" },
-      {
-        src: "/src/assets/img/especializados/10.jpg",
-        alt: "Diseño especial 10",
-      },
+      { src: "/src/assets/img/especializados/10.jpg", alt: "Diseño especial 10" },
     ],
   },
 };
@@ -55,34 +63,79 @@ export default function TemplatesGallery() {
   const [activeCategory, setActiveCategory] = useState("arcos");
 
   return (
-    <div className="contenedorDos" id="gallery">
-      {/* Navegación de categorías */}
+    <div
+      className="contenedorDos"
+      id="templates"
+      style={{
+        backgroundImage: `url(${categoriesData[activeCategory].background})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+        transition: "background-image 0.5s ease-in-out",
+      }}
+    >
+      {/* Overlay */}
+      <div className="background-overlay"></div>
+
+      {/* NAV + Haunted al pasar el mouse */}
       <nav className="navCategory">
-        <button
-          className={`btn btn-light hvr-buzz-out ${
-            activeCategory === "arcos" ? "active" : ""
-          }`}
-          onClick={() => setActiveCategory("arcos")}
-        >
-          Arcos
-        </button>
-        <button
-          className={`btn btn-light hvr-buzz-out ${
-            activeCategory === "bouquets" ? "active" : ""
-          }`}
-          onClick={() => setActiveCategory("bouquets")}
-        >
-          Bouquets
-        </button>
-        <button
-          className={`btn btn-light hvr-buzz-out ${
-            activeCategory === "diseños" ? "active" : ""
-          }`}
-          onClick={() => setActiveCategory("diseños")}
-        >
-          Diseños Especiales
-        </button>
+    
+          <button
+            className={`btn btn-light hvr-buzz-out ${
+              activeCategory === "arcos" ? "active" : ""
+            }`}
+            onClick={() => setActiveCategory("arcos")}
+          >
+            Arcos
+          </button>
+      
+
+      
+          <button
+            className={`btn btn-light hvr-buzz-out ${
+              activeCategory === "bouquets" ? "active" : ""
+            }`}
+            onClick={() => setActiveCategory("bouquets")}
+          >
+            Bouquets
+          </button>
+        
+
+        <Haunted>
+          <button
+            className={`btn btn-light hvr-buzz-out ${
+              activeCategory === "diseños" ? "active" : ""
+            }`}
+            onClick={() => setActiveCategory("diseños")}
+          >
+            Halloween
+          </button>
+        </Haunted>
       </nav>
+
+      {/* OJOS HALLOWEEN SOLO EN DISEÑOS */}
+      {activeCategory === "diseños" && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "20px",
+            marginBottom: "20px",
+            zIndex: 20,
+          }}
+        >
+          <Eyes
+            width={250}
+            eyeBallColor="white"
+            irisColor="#8a0303"
+            pupilColor="black"
+            animationTime={1}
+            pupilSize={1.2}
+            follow={true}
+          />
+        </div>
+      )}
 
       {/* Galería dinámica */}
       <div
