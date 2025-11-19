@@ -11,8 +11,8 @@
 }
 
 /* Asegurar que el body ocupe todo el ancho */
-body {
-    width: 100%;
+html, body {
+    max-width: 100%;
     overflow-x: hidden;
     /* Evitar scroll horizontal */
 }
@@ -225,19 +225,19 @@ body {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    /* Añadido para centrar verticalmente */
-    height: 100%;
+    height: 100vh;
     background-image: url(../src/assets/img/fondoUno.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
     padding: 5rem 10rem;
-    width: 100%;
+    width: 100vw;
     max-width: 100%;
     /* Asegurar que no se desborde */
     overflow: hidden;
     /* Prevenir desbordamiento */
+    position: relative;
 }
 
 .contenedorUno .contenido-interno {
@@ -305,34 +305,57 @@ body {
     transform: scale(1.1);
 }
 
-.galeria {
-    padding-bottom: 20px;
-    padding-top: 20px;
-    background-image: url(..//src/assets/img/Auno.jpg);
-    background-size: cover;
-    background-attachment: fixed;
-    width: 100%;
-    /* Añadido */
-}
-
 .tittleIndex {
     text-align: center;
     width: 100%;
 }
+
+
+/*************************** GALERIA CARRUSEL (PARALLAX REAL) ******************/
+
+.galeria {
+    position: relative;
+    width: 100%;
+    padding: 4rem 0;
+    overflow: hidden; /* evita problemas con el fondo fijo */
+}
+
+/* Fondo parallax REAL, compatible en móvil */
+.galeria::before {
+    content: "";
+    position: fixed; /* CLAVE DEL EFECTO */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    background-image: url(../src/assets/img/halloween/halloweenTwo.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    z-index: -2;
+}
+
+/********************* CONTENIDO INTERNO *********************/
 
 .tituloImagen {
     display: block;
     margin-left: auto;
     margin-right: auto;
     max-width: 60%;
+    z-index: 1;
+    position: relative;
 }
 
-/* Asegurar que las imágenes del carrusel se adapten */
+/* Carrusel  */
 .carousel-item img {
     width: 40%;
     height: 100%;
     object-fit: contain;
     margin: auto;
+    position: relative;
+    z-index: 1;
 }
 
 .carousel-control-prev-icon,
@@ -341,20 +364,16 @@ body {
     border-radius: 50%;
     background-size: 50% 50%;
     padding: 25px;
+    z-index: 1;
 }
 
-.carousel-item {
-    position: relative;
-    text-align: center;
-}
-
-
-
+/* Botón */
 .divCuadro {
     display: flex;
     justify-content: center;
     width: 100%;
-    /* Añadido */
+    z-index: 1;
+    position: relative;
 }
 
 .cuadroGallery {
@@ -368,47 +387,64 @@ body {
     border-radius: 5px;
 }
 
-.divCuadro a {
-    text-align: center;
-    display: block;
-    padding: 10px;
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-    font-size: 18px;
-    margin-top: 7vh;
-    border-radius: 5px;
+/********************* RESPONSIVE *********************/
+
+@media (max-width: 768px) {
+    .tituloImagen {
+        max-width: 80%;
+    }
+    .carousel-item img {
+        width: 70%;
+    }
 }
 
-.divCuadro a:hover {
-    background-color: var(--primario);
+@media (max-width: 576px) {
+    .tituloImagen {
+        max-width: 90%;
+    }
+    .carousel-item img {
+        width: 85%;
+    }
 }
+
 
 /*****************************  SERVICIOS   ********************************/
 
+/* Fondo Parallax REAL compatible con móvil */
 .contenedorServicios {
+    position: relative;
+    width: 100%;
+    padding: 2rem 7rem;
+    overflow: hidden; /* importante */
     display: flex;
     justify-content: space-evenly;
-    height: 100%;
-    background-image: url(../src/assets/img/fondoUno.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    background-size: cover;
-    padding: 2rem 7rem;
-    width: 100%;
-    /* Añadido */
 }
+
+/* Este pseudo-elemento hace la magia */
+.contenedorServicios::before {
+    content: "";
+    position: fixed;             /* FONDO REALMENTE QUIETO */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(../src/assets/img/fondoUno.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    z-index: -2;  /* MÁS ATRÁS QUE TODO */
+}
+
+
 
 .services {
     padding: 2rem;
     width: 100%;
-    /* Añadido */
 }
 
 .servicesWrapper {
     width: 80%;
-    min-height: 100vh;
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
@@ -428,13 +464,11 @@ body {
     transition: all 0.5s ease;
     padding: .5rem;
     overflow: hidden;
-    transition: transform 0.4s ease, transform 0.4s ease-in-out;
 }
 
 .service:hover {
-    box-shadow: 0px 20px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.5s ease;
     transform: scale(1.1);
+    transition: 0.4s;
 }
 
 .service img {
@@ -453,109 +487,74 @@ body {
 }
 
 
+/************  MÓVIL  ************/
+@media (max-width: 576px) {
+    .contenedorServicios {
+        padding: 1rem;
+    }
+
+    .servicesWrapper {
+        width: 100%;
+    }
+}
+
+
 /********************************* ABOUT ***********************************************/
 
+/* Contenedor principal */
 .section2 {
+    position: relative;
+    width: 100%;
+    padding: 8rem 20rem;
+    overflow: hidden; /* Evita desbordes */
+}
+
+/* Fondo fijo REAL (funciona en móvil y escritorio) */
+.section2::before {
+    content: "";
+    position: fixed;        /* LA CLAVE DEL PARALLAX REAL */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
     background-image: url(../src/assets/img/atres.jpg);
     background-size: cover;
-    background-attachment: fixed;
-    padding: 8rem 20rem;
-    width: 100%;
-    /* Añadido */
-}
-
-/************************************ GALLERY ****************************************/
-
-
-
-.contenedorDos {
-    background-image: url(../src/assets/img/fondoUno.jpg);
-    background-repeat: no-repeat;
     background-position: center;
-    background-attachment: fixed;
-    background-size: cover;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    width: 100%;
-    /* Añadido */
+    background-repeat: no-repeat;
+
+    z-index: -2; /* Va detrás del contenido */
 }
 
-.sectionGallery {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 80%;
-    margin: auto;
+/* Capa de oscurecimiento suave opcional */
+.section2::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2); 
+    z-index: -1;
 }
 
-/* GRID - CORREGIDO PARA RESPONSIVE */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);    
-    padding: 6rem;
-    width: 100%;
-    /* Añadido */
+/*********** Contenido interno ************/
+.parrafoSegundo {
+    position: relative;
+    z-index: 1; /* Garantiza que quede por encima del fondo */
+    color: white;
 }
 
-img {
-    max-width: 100%;
-    width: 100%;
-    height: auto;
-    display: block;
+/*********** RESPONSIVE ************/
+@media (max-width: 768px) {
+    .section2 {
+        padding: 4rem 2rem;
+    }
 }
 
-.navCategory {
-    display: flex;
-    justify-content: space-evenly;
-    gap: 4vh;
-    width: 100%;
-    /* Añadido */
-    flex-wrap: wrap;
-    /* Para móvil */
+@media (max-width: 576px) {
+    .section2 {
+        padding: 3rem 1rem;
+    }
 }
-
-.btn-light {
-    border: 3px solid black;
-}
-
-
-/* Cambiar color del botón activo en la navegación de categorías */
-.navCategory .btn-light.active {
-    background-color: var(--primario) !important;
-    border-color: #000000 !important;
-    color: #000000 !important;
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Opcional: mejorar el efecto hover para que sea consistente */
-.navCategory .btn-light:hover {
-    background-color: var(--primario);
-    border-color: #000000;
-    transform: scale(1.02);
-    transition: all 0.3s ease;
-}
-
-.producto {
-    background-color: #eeeeee4d;
-    padding: .5rem;
-    transition: transform 0.4s ease, transform 0.4s ease-in-out;
-}
-
-.producto:hover {
-    transform: scale(1.1);
-}
-
-.productoNombre,
-.productoPrecio {
-    font-size: 1rem;
-    text-align: center;
-    line-height: 1.2;
-}
-
-.producto img {
-    padding: 1vh;
-}
+  
 
 /************************************** Footer *********************************/
 .footer {
@@ -751,7 +750,8 @@ img {
     }
 
     .navCategory {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
         /* Botones en columna */
         align-items: center;
         gap: 2vh;
@@ -762,6 +762,17 @@ img {
         margin-left: 0;
         text-align: center;
     }
+}
+
+@media (max-width: 768px) {
+    .contenedorUno {
+        background-attachment: scroll; /* En móvil usa scroll en lugar de fixed */
+        background-position: center center;
+        height: auto;
+        min-height: 100vh;
+        padding: 5rem 2rem;
+    }
+
 }
 
 @media (max-width: 576px) {
@@ -810,7 +821,156 @@ img {
     }
 }
 
-/* SOLO PARA HALLOWEEN */
+
+
+/************************************************GALERY*************************************/
+
+/* Contenedor principal (mantiene fondo) */
+.contenedorDos {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  width: 100%;
+}
+
+.contenedorDos {
+  position: relative;
+  width: 100%;
+  padding: 50px 0;
+  overflow: hidden;
+}
+
+.contenedorDos-bg {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  z-index: -1;
+}
+
+
+
+/* Section: ahora position relative para superponer decoraciones */
+.sectionGallery {
+  position: relative;            /* importante para posicionar web-left/right */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 1100px;            /* evita que el carrusel se desplace a la izquierda en pantallas grandes */
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* DECORACIONES HALLOWEEN: absolutas y encima del carrusel */
+.web-left,
+.web-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 140px;                /* ajustar tamaño según diseño */
+  height: 140px;               /* ajustar según tu asset o diseño */
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;        /* no bloquean clicks */
+  z-index: 30;                 /* encima del carrusel */
+  opacity: 0.95;
+}
+
+/* ejemplo: si usas imágenes o svg como fondo para las decoraciones, asignalas aquí */
+/* Ajusta las rutas según tus assets */
+.web-left {
+  left: 10px;
+  background-image: url('../assets/img/halloween/ghost-left.png');
+}
+.web-right {
+  right: 10px;
+  background-image: url('../assets/img/halloween/ghost-right.png');
+}
+
+/* Carrusel: encima del contenido base, pero debajo de decoraciones */
+.customCarousel {
+  width: 70%;
+  max-width: 950px;
+  margin: 40px auto;
+  border-radius: 20px;
+  overflow: hidden !important;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 10;
+}
+
+/* Imagen del slide */
+.carouselImg {
+  height: 500px;
+  object-fit: cover;
+  display: block;
+  width: 100%;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 1199px) {
+  .sectionGallery { max-width: 1000px; }
+  .carouselImg { height: 420px; }
+  .web-left, .web-right { width: 110px; height: 110px; }
+}
+
+@media (max-width: 767px) {
+  .customCarousel { width: 80%; margin: 20px auto; }
+  .carouselImg { height: 260px; }
+  .web-left, .web-right { display: none; } /* ocultar decoraciones en móviles */
+}
+
+/* --- Mantengo tus estilos de botones y productos (sin cambios críticos) --- */
+.navCategory {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 4vh;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.btn-light {
+  border: 3px solid black;
+}
+
+.navCategory .btn-light.active {
+  background-color: var(--primario) !important;
+  border-color: #000000 !important;
+  color: #000000 !important;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navCategory .btn-light:hover {
+  background-color: var(--primario);
+  border-color: #000000;
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+
+/* Limpieza: evita padding gigante que empujaba layout en versiones anteriores */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 0;      /* antes tenías padding: 6rem; eso desplazaba elementos */
+  width: 100%;
+}
+
+.producto {
+  background-color: #eeeeee4d;
+  padding: .5rem;
+  transition: transform 0.4s ease;
+}
+.producto:hover { transform: scale(1.03); box-shadow: 0 0 15px rgba(0,0,0,0.4); }
+
 .productoHalloween:hover {
   transform: scale(1.05);
   box-shadow: 0 0 25px rgba(255, 0, 0, 0.7);
@@ -818,8 +978,4 @@ img {
   transition: 0.3s ease-in-out;
 }
 
-/* Para productos normales */
-.producto:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
-}
+

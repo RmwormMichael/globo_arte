@@ -177,7 +177,7 @@ export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
                   className="nav-link btn btn-link"
                   onClick={() => navigateToSection("templates")}
                 >
-                  Templates
+                  Galería
                 </button>
               </li>
 
@@ -186,7 +186,7 @@ export default function Navbar({ onOpenLogin, onOpenRegister, onLogout }) {
                   className="nav-link btn btn-link"
                   onClick={() => navigateToSection("sectGallery")}
                 >
-                  Galería
+                  Eventos
                 </button>
               </li>
 

@@ -6,7 +6,7 @@ import disenosEspeciales from '../assets/img/11.jpg';
 export default function ServicesSection() {
   return (
     <div className='contenedorServicios' id='services'>
-    <div className="services" id="services">
+    <div className="services">
       <h1 className="tituloImagen">
         <img 
           src={nuestrosServicios} 

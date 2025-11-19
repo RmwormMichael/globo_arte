@@ -65,16 +65,13 @@ export default function TemplatesGallery() {
   return (
     <div
       className="contenedorDos"
-      id="templates"
-      style={{
-        backgroundImage: `url(${categoriesData[activeCategory].background})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed",
-        transition: "background-image 0.5s ease-in-out",
-      }}
-    >
+      id="templates"    >
+        <div
+    className="contenedorDos-bg"
+    style={{
+      backgroundImage: `url(${categoriesData[activeCategory].background})`
+    }}
+  />
       {/* Overlay */}
       <div className="background-overlay"></div>
 
